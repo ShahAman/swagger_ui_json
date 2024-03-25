@@ -1,0 +1,547 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+      "title": "Campus Marketplace Public API",
+      "description": "API introduction and endpoint descriptions...",
+      "version": "v2024.1"
+    },
+    "servers": [
+      {
+        "url": "https://c01-usa-east-et.integrate-test.boomi.com/ws/rest/CM-API/V2024.1"
+      }
+    ],
+    "paths": {
+      "/Auth": {
+        "post": {
+          "description": "It takes a JSON object containing your API `Username` and `Password` to authenticate...",
+          "tags": ["Authentication"],
+          "requestBody": {
+            "description": "Authentication request body desc",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthBody"
+                }
+              },
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Successful Authentication",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuthResp"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Students": {
+        "get": {
+          "description": "Retrieve student information...",
+          "tags": ["Students"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "X-Auth-Token",
+              "schema": {
+                "type": "string"
+              },
+              "required": true,
+              "description": "ApiToken value of Authentication response."
+            },
+            {
+              "name": "StudentID",
+              "in": "query",
+              "description": "ID of the student",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "name": "CountryCodeID",
+              "in": "query",
+              "description": "Country-Code ID of the student",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "name": "FirstName",
+              "in": "query",
+              "description": "First name of the student",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "LastName",
+              "in": "query",
+              "description": "Last name of the student",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "TelephoneNumber",
+              "in": "query",
+              "description": "Telephone Number",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "AddressLine",
+              "in": "query",
+              "description": "Address line of the student",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "Locality",
+              "in": "query",
+              "description": "Local area information of the student",
+              "required": false,
+              "schema": {
+                "type": "string"
+              }
+            },
+            {
+              "name": "PostalCode",
+              "in": "query",
+              "description": "Postal code of the student",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "name": "StudentSerialNum",
+              "in": "query",
+              "description": "Student Serial Number",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "name": "GenderTypeID",
+              "in": "query",
+              "description": "Gender type ID is from REF_GenderType...",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "name": "IsNotEnrolledAny[0]",
+              "in": "query",
+              "description": "Check student enrollment status.",
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful retrieval of student information.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StudentResp"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Registrations": {
+        "get": {
+          "description": "Retrieve registration information...",
+          "tags": ["Registrations"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "X-Auth-Token",
+              "schema": {
+                "type": "string"
+              },
+              "required": true,
+              "description": "ApiToken value of Authentication response."
+            },
+            {
+              "name": "PersonID",
+              "in": "query",
+              "description": "ID of the person",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "name": "StudentID",
+              "in": "query",
+              "description": "ID of the student",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "name": "SectionID",
+              "in": "query",
+              "description": "ID of the section",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            },
+            {
+              "name": "OrderID",
+              "in": "query",
+              "description": "ID of the order",
+              "required": false,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Successful retrieval of registration information.",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/RegistrationResp"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "basicAuth": {
+          "type": "object",
+          "properties": {
+            "Username": {
+              "type": "string",
+              "required": ["true"],
+              "default": "jenzabar-C4PH5G.579CD3"
+            },
+            "Password": {
+              "type": "string",
+              "required": ["true"],
+              "default": "cea64bbd-bddc-4b6f-9e2d-3481e24131f3"
+            }
+          }
+        },
+        "AuthBody": {
+          "type": "object",
+          "properties": {
+            "Username": {
+              "type": "string",
+              "required": ["true"],
+              "default": "joeAdmin"
+            },
+            "Password": {
+              "type": "string",
+              "required": ["true"],
+             
+              "default": "campus123"
+            }
+          }
+        },
+        "AuthResp": {
+          "type": "object",
+          "properties": {
+            "StatusCode": {
+              "type": "integer",
+              "default": 1
+            },
+            "ResponseTimestamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "ResponseData": {
+              "type": "object",
+              "properties": {
+                "ApiToken": {
+                  "type": "string",
+                  "default": "ca103999817a41d6+63D557BB9412ADADC7CDE8E83C952E98"
+                },
+                "ValidUntil": {
+                  "type": "string",
+                  "default": "2024-03-10T00:00:00-08:00"
+                }
+              }
+            },
+            "ResponseError": {
+              "type": "object"
+            }
+          }
+        },
+        "StudentResp": {
+          "type": "object",
+          "properties": {
+            "StatusCode": {
+              "type": "integer",
+              "default": 1
+            },
+            "ResponseTimestamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "ResponseData": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "Address": {
+                    "type": "string"
+                  },
+                  "IsActive": {
+                    "type": "boolean"
+                  },
+                  "FormattedName": {
+                    "type": "string"
+                  },
+                  "PostalCode": {
+                    "type": "string"
+                  },
+                  "Birthday": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "SortName": {
+                    "type": "string"
+                  },
+                  "TelephoneNumber": {
+                    "type": "string"
+                  },
+                  "StartDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "StudentDescriptor": {
+                    "type": "string"
+                  },
+                  "FERPA": {
+                    "type": "boolean"
+                  },
+                  "IsDeceased": {
+                    "type": "boolean"
+                  },
+                  "AllowMarketing": {
+                    "type": "boolean"
+                  },
+                  "Locality": {
+                    "type": "string"
+                  },
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "EmailAddress": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "StudentID": {
+                    "type": "integer"
+                  },
+                  "Ethnicity": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "PersonID": {
+                          "type": "integer"
+                        }
+                      }
+                    }
+                  },
+                  "AddressLine1": {
+                    "type": "string"
+                  },
+                  "State": {
+                    "type": "string"
+                  },
+                  "Country": {
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "GenderTypeName": {
+                    "type": "string"
+                  },
+                  "StudentSerialNum": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Page": {
+              "type": "object",
+              "properties": {
+                "CurrentPage": {
+                  "type": "integer"
+                },
+                "PageSize": {
+                  "type": "integer"
+                },
+                "TotalPages": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "RegistrationResp": {
+          "type": "object",
+          "properties": {
+            "StatusCode": {
+              "type": "integer",
+              "default": 1
+            },
+            "ResponseTimestamp": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "ResponseData": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "SectionNumber": {
+                    "type": "string"
+                  },
+                  "SeatGroup": {
+                    "type": "string"
+                  },
+                  "Birthday": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "OrderID": {
+                    "type": "integer"
+                  },
+                  "CreateDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "GradeScaleType": {
+                    "type": "string"
+                  },
+                  "EnrollmentStatus": {
+                    "type": "string"
+                  },
+                  "PersonID": {
+                    "type": "integer"
+                  },
+                  "IsRepeat": {
+                    "type": "boolean"
+                  },
+                  "SectionID": {
+                    "type": "integer"
+                  },
+                  "TranscriptCreditType": {
+                    "type": "string"
+                  },
+                  "AccountID": {
+                    "type": "integer"
+                  },
+                  "FirstName": {
+                    "type": "string"
+                  },
+                  "FinalEnrollmentDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "TranscriptCreditTypeID": {
+                    "type": "integer"
+                  },
+                  "PurchaserName": {
+                    "type": "string"
+                  },
+                  "EmailAddress": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "StudentID": {
+                    "type": "integer"
+                  },
+                  "GradeScaleTypeID": {
+                    "type": "integer"
+                  },
+                  "PurchaserPersonID": {
+                    "type": "integer"
+                  },
+                  "LastName": {
+                    "type": "string"
+                  },
+                  "OfferingName": {
+                    "type": "string"
+                  },
+                  "StudentName": {
+                    "type": "string"
+                  },
+                  "IsCompleteOnTermination": {
+                    "type": "boolean"
+                  },
+                  "SeatGroupID": {
+                    "type": "integer"
+                  },
+                  "OfferingID": {
+                    "type": "integer"
+                  },
+                  "AccountName": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "Page": {
+              "type": "object",
+              "properties": {
+                "CurrentPage": {
+                  "type": "integer"
+                },
+                "PageSize": {
+                  "type": "integer"
+                },
+                "TotalPages": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+    
